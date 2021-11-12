@@ -111,17 +111,17 @@ Public Class Principal
         End While
     End Sub
 
-    Sub Hablar() 'no funciona
-        End
-        'While True
-        '    Dim DIME As String = "Son las " &
-        '              DateTime.Now.ToString("hh") &
-        '              " horas, con " & DateTime.Now.ToString("mm") &
-        '              "minutos, con " & DateTime.Now.ToString("ss") &
-        '              "segundos. Del dia " & DateTime.Now.ToString("dd/mm/yyyy")
-        '    Dim SAPI = CreateObject("SAPI.SpVoice")
-        '    SAPI.Speak(DIME)
-        'End While
+    Sub Hablar() 'Funciona
+        While True
+            Dim DIME As String = "Son las " &
+                      DateTime.Now.ToString("hh") &
+                      " horas, con " & DateTime.Now.ToString("mm") &
+                      " minutos, y " & DateTime.Now.ToString("ss") &
+                      " segundos, " & DateTime.Now.ToString("tt") & ". Del día " & DateTime.Now.ToString("dd") & ", del mes " & DateTime.Now.ToString("MM") & ", del año " & DateTime.Now.ToString("yyyy")
+            Dim SAPI = CreateObject("SAPI.SpVoice")
+            SAPI.Speak(DIME)
+            Threading.Thread.Sleep(3000)
+        End While
     End Sub
 
     Sub PlaySongs() 'Funciona
