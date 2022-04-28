@@ -13,7 +13,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyCompany("Zhenboro")>
 <Assembly: AssemblyProduct("NotAVirus")>
 <Assembly: AssemblyCopyright("")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTrademark("Zhenboro")>
 
 <Assembly: ComVisible(False)>
 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' mediante el carácter '*', como se muestra a continuación:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("69.6969.69.420")>
-<Assembly: AssemblyFileVersion("69.6969.69.420")>
+<Assembly: AssemblyVersion("1.2.0.0")>
+<Assembly: AssemblyFileVersion("27.04.20.22")>

