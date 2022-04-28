@@ -57,6 +57,9 @@ Public Class Principal
             Process.Start(Application.ExecutablePath, "/PocasCarpetas")
 
             Process.Start(Application.ExecutablePath, "/Hablar")
+
+            Process.Start(Application.ExecutablePath, "/AnimeGirlWantsCreditCarInfo")
+
             End
         Catch
         End Try

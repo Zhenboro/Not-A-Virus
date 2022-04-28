@@ -11,6 +11,9 @@ Public Class AnimeGirlWantsCreditCarInfo
         ReadParameters(Command())
         ReadValues()
     End Sub
+    Private Sub AnimeGirlWantsCreditCarInfo_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        End
+    End Sub
     Sub ReadParameters(ByVal parametros As String)
         Try
             If parametros <> Nothing Then
