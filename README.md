@@ -35,8 +35,8 @@ Will start:
 ```/Hablar```: Every 3 seconds that passes, a voice will indicate the time and date.  
 
 ```/AnimeGirlWantsCreditCarInfo <type> <filePathOrUrl>```
-- type: If you must read from a local file `--localconfig` or download and then read `--remoteConfig`.  
+- type: If you must read from a local file `--localConfig` or download and then read `--remoteConfig`.  
 - filePathOrUrl:  
 	- in the `--localConfig` Case. Put the file path of the config file.  
-	- in the `-remoteConfig` Case. Put the file download link. (Download The Read)  
+	- in the `--remoteConfig` Case. Put the file download link. (Download then Read)  
 - If you do not put arguments, a preconfigured instance will begin.  
