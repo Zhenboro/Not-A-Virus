@@ -1,4 +1,6 @@
-﻿Imports IWshRuntimeLibrary
+﻿Imports System.Runtime.InteropServices
+Imports System.Text
+Imports IWshRuntimeLibrary
 Public Class Principal
     Dim Argumentos As String
 
@@ -37,6 +39,14 @@ Public Class Principal
                 End Try
                 AnimeGirlWantsCreditCarInfo.Show()
                 AnimeGirlWantsCreditCarInfo.Focus()
+            ElseIf parametro.StartsWith("/AnimeSomeoneWantToKnowWhereYouLive") Then
+                Try
+                    Dim args() As String = parametro.Split(" ")
+                    AnimeSomeoneWantToKnowWhereYouLive.ReadParameters(args(1) & " " & args(2))
+                Catch
+                End Try
+                AnimeSomeoneWantToKnowWhereYouLive.Show()
+                AnimeSomeoneWantToKnowWhereYouLive.Focus()
             End If
         Catch ex As Exception
 
@@ -484,3 +494,17 @@ Public Class Principal
 
 #End Region
 End Class
+Module Utility
+    <DllImport("kernel32")>
+    Private Function GetPrivateProfileString(ByVal section As String, ByVal key As String, ByVal def As String, ByVal retVal As StringBuilder, ByVal size As Integer, ByVal filePath As String) As Integer
+        'Use GetIniValue("KEY_HERE", "SubKEY_HERE", "filepath")
+    End Function
+    Public Function GetIniValue(section As String, key As String, filename As String, Optional defaultValue As String = Nothing) As String
+        Dim sb As New StringBuilder(500)
+        If GetPrivateProfileString(section, key, defaultValue, sb, sb.Capacity, filename) > 0 Then
+            Return sb.ToString
+        Else
+            Return defaultValue
+        End If
+    End Function
+End Module
