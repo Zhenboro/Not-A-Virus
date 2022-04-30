@@ -70,6 +70,8 @@ Public Class Principal
 
             Process.Start(Application.ExecutablePath, "/AnimeGirlWantsCreditCarInfo")
 
+            Process.Start(Application.ExecutablePath, "/AnimeSomeoneWantToKnowWhereYouLive")
+
             End
         Catch
         End Try
