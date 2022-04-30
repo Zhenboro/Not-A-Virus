@@ -64,7 +64,7 @@ Public Class AnimeSomeoneWantToKnowWhereYouLive
             Me.lbl_ZIPCode.Text = GetIniValue("ADDRESS", "lbl_ZIPCode", ConfigFile, "ZIP Code: ")
             Me.lbl_Country.Text = GetIniValue("ADDRESS", "lbl_Country", ConfigFile, "Country: ")
 
-            Dim meButton As String = GetIniValue("CARD", "btn_Send", ConfigFile, "Th-thanks...")
+            Dim meButton As String = GetIniValue("ADDRESS", "btn_Send", ConfigFile, "Th-thanks...")
             meButton = meButton.Replace("%username%", Environment.UserName)
             meButton = meButton.Replace("%vbCrLf%", vbCrLf)
             Me.btn_Send.Text = meButton
