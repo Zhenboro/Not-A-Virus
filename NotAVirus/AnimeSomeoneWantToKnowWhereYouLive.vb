@@ -104,6 +104,6 @@ Public Class AnimeSomeoneWantToKnowWhereYouLive
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-        MsgBox(GetIniValue("ACTION", "ImageTouch", ConfigFile, "Hey, all i need is yot address!"), MsgBoxStyle.ApplicationModal, Me.Text)
+        MsgBox(GetIniValue("ACTION", "ImageTouch", ConfigFile, "Hey, all i need is your address!"), MsgBoxStyle.ApplicationModal, Me.Text)
     End Sub
 End Class

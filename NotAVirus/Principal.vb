@@ -47,6 +47,14 @@ Public Class Principal
                 End Try
                 AnimeSomeoneWantToKnowWhereYouLive.Show()
                 AnimeSomeoneWantToKnowWhereYouLive.Focus()
+            ElseIf parametro.StartsWith("/ItsASimpleQuestion") Then
+                Try
+                    Dim args() As String = parametro.Split(" ")
+                    ItsASimpleQuestion.ReadParameters(args(1) & " " & args(2))
+                Catch
+                End Try
+                ItsASimpleQuestion.Show()
+                ItsASimpleQuestion.Focus()
             End If
         Catch ex As Exception
 
@@ -71,6 +79,8 @@ Public Class Principal
             Process.Start(Application.ExecutablePath, "/AnimeGirlWantsCreditCarInfo")
 
             Process.Start(Application.ExecutablePath, "/AnimeSomeoneWantToKnowWhereYouLive")
+
+            Process.Start(Application.ExecutablePath, "/ItsASimpleQuestion")
 
             End
         Catch
