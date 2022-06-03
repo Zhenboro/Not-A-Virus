@@ -1,17 +1,24 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Text
-Public Class AnimeSomeoneWantToKnowWhereYouLive
+Public Class AnimeSomeoneWantsToKnowWhereYouLive
     Dim DIRCommons As String = "C:\Users\" & Environment.UserName & "\AppData\Local\Temp"
     Dim ConfigFile As String = DIRCommons & "\AnimeSomeoneWantToKnowWhereYouLive.ini"
     Dim userCanExit As Boolean = False
 
-    Private Sub AnimeSomeoneWantToKnowWhereYouLive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub AnimeSomeoneWantsToKnowWhereYouLive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReadParameters(Command())
         ReadValues()
     End Sub
-    Private Sub AnimeSomeoneWantToKnowWhereYouLive_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub AnimeSomeoneWantsToKnowWhereYouLive_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         End
+    End Sub
+    Private Sub AnimeSomeoneWantsToKnowWhereYouLive_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles Me.HelpRequested
+        If MessageBox.Show("'AnimeSomeoneWantsToKnowWhereYouLive' es parte de 'Not-A-Virus' y este fue creado y desarrollado por Zhenboro." & vbCrLf & "¿Desea visitar el sitio oficial?", "Not-A-Virus Series", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            Process.Start("https://github.com/Zhenboro/Not-A-Virus")
+            Threading.Thread.Sleep(500)
+            Process.Start("https://github.com/Zhenboro")
+        End If
     End Sub
     Sub ReadParameters(ByVal parametros As String)
         Try
@@ -31,7 +38,7 @@ Public Class AnimeSomeoneWantToKnowWhereYouLive
 
             End If
         Catch ex As Exception
-            Console.WriteLine("[GetValues@AnimeSomeoneWantToKnowWhereYouLive]Error: " & ex.Message)
+            Console.WriteLine("[GetValues@AnimeSomeoneWantsToKnowWhereYouLive]Error: " & ex.Message)
             End
         End Try
     End Sub
@@ -43,7 +50,7 @@ Public Class AnimeSomeoneWantToKnowWhereYouLive
             End If
             My.Computer.Network.DownloadFile(fileURL, ConfigFile)
         Catch ex As Exception
-            Console.WriteLine("[GetValues@AnimeSomeoneWantToKnowWhereYouLive]Error: " & ex.Message)
+            Console.WriteLine("[GetValues@AnimeSomeoneWantsToKnowWhereYouLive]Error: " & ex.Message)
             End
         End Try
     End Sub
@@ -73,7 +80,7 @@ Public Class AnimeSomeoneWantToKnowWhereYouLive
 
             Me.PictureBox1.ImageLocation = GetIniValue("IMAGE", "Picture", ConfigFile, "https://i.imgur.com/JZIxIaHb.jpg")
         Catch ex As Exception
-            Console.WriteLine("[ReadValues@AnimeSomeoneWantToKnowWhereYouLive]Error: " & ex.Message)
+            Console.WriteLine("[ReadValues@AnimeSomeoneWantsToKnowWhereYouLive]Error: " & ex.Message)
             End
         End Try
     End Sub

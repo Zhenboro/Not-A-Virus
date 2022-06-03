@@ -25,6 +25,7 @@ Partial Class ItsASimpleQuestion
         Me.btn_Yes = New System.Windows.Forms.Button()
         Me.btn_No = New System.Windows.Forms.Button()
         Me.lbl_Question = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'btn_Yes
@@ -63,15 +64,28 @@ Partial Class ItsASimpleQuestion
         Me.lbl_Question.Text = "Are u dumb?"
         Me.lbl_Question.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Label1
+        '
+        Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label1.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(12, 399)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(490, 37)
+        Me.Label1.TabIndex = 3
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
         'ItsASimpleQuestion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(514, 491)
-        Me.Controls.Add(Me.btn_Yes)
         Me.Controls.Add(Me.btn_No)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.btn_Yes)
         Me.Controls.Add(Me.lbl_Question)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "ItsASimpleQuestion"
@@ -84,4 +98,5 @@ Partial Class ItsASimpleQuestion
     Friend WithEvents btn_Yes As Button
     Friend WithEvents btn_No As Button
     Friend WithEvents lbl_Question As Label
+    Friend WithEvents Label1 As Label
 End Class

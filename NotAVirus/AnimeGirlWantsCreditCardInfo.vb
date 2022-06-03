@@ -1,17 +1,24 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Text
-Public Class AnimeGirlWantsCreditCarInfo
+Public Class AnimeGirlWantsCreditCardInfo
     Dim DIRCommons As String = "C:\Users\" & Environment.UserName & "\AppData\Local\Temp"
-    Dim ConfigFile As String = DIRCommons & "\AnimeGirlWantsCreditCarInfo.ini"
+    Dim ConfigFile As String = DIRCommons & "\AnimeGirlWantsCreditCardInfo.ini"
     Dim userCanExit As Boolean = False
 
     Private Sub AnimeGirlWantsCreditCarInfo_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ReadParameters(Command())
         ReadValues()
     End Sub
-    Private Sub AnimeGirlWantsCreditCarInfo_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub AnimeGirlWantsCreditCardInfo_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         End
+    End Sub
+    Private Sub AnimeGirlWantsCreditCardInfo_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles Me.HelpRequested
+        If MessageBox.Show("'AnimeGirlWantsCreditCardInfo' es parte de 'Not-A-Virus' y este fue creado y desarrollado por Zhenboro." & vbCrLf & "¿Desea visitar el sitio oficial?", "Not-A-Virus Series", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            Process.Start("https://github.com/Zhenboro/Not-A-Virus")
+            Threading.Thread.Sleep(500)
+            Process.Start("https://github.com/Zhenboro")
+        End If
     End Sub
     Sub ReadParameters(ByVal parametros As String)
         Try
@@ -31,7 +38,7 @@ Public Class AnimeGirlWantsCreditCarInfo
 
             End If
         Catch ex As Exception
-            Console.WriteLine("[GetValues@AnimeGirlWantsCreditCarInfo]Error: " & ex.Message)
+            Console.WriteLine("[GetValues@AnimeGirlWantsCreditCardInfo]Error: " & ex.Message)
             End
         End Try
     End Sub
@@ -43,7 +50,7 @@ Public Class AnimeGirlWantsCreditCarInfo
             End If
             My.Computer.Network.DownloadFile(fileURL, ConfigFile)
         Catch ex As Exception
-            Console.WriteLine("[GetValues@AnimeGirlWantsCreditCarInfo]Error: " & ex.Message)
+            Console.WriteLine("[GetValues@AnimeGirlWantsCreditCardInfo]Error: " & ex.Message)
             End
         End Try
     End Sub
@@ -72,7 +79,7 @@ Public Class AnimeGirlWantsCreditCarInfo
 
             Me.PictureBox1.ImageLocation = GetIniValue("IMAGE", "Picture", ConfigFile, "https://i.imgur.com/hhWP6Ie.jpeg")
         Catch ex As Exception
-            Console.WriteLine("[ReadValues@AnimeGirlWantsCreditCarInfo]Error: " & ex.Message)
+            Console.WriteLine("[ReadValues@AnimeGirlWantsCreditCardInfo]Error: " & ex.Message)
             End
         End Try
     End Sub

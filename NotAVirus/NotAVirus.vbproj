@@ -73,16 +73,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimeGirlWantsCreditCarInfo.Designer.vb">
-      <DependentUpon>AnimeGirlWantsCreditCarInfo.vb</DependentUpon>
+    <Compile Include="AnimeGirlWantsCreditCardInfo.Designer.vb">
+      <DependentUpon>AnimeGirlWantsCreditCardInfo.vb</DependentUpon>
     </Compile>
-    <Compile Include="AnimeGirlWantsCreditCarInfo.vb">
+    <Compile Include="AnimeGirlWantsCreditCardInfo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AnimeSomeoneWantToKnowWhereYouLive.Designer.vb">
-      <DependentUpon>AnimeSomeoneWantToKnowWhereYouLive.vb</DependentUpon>
+    <Compile Include="AnimeSomeoneWantsToKnowWhereYouLive.Designer.vb">
+      <DependentUpon>AnimeSomeoneWantsToKnowWhereYouLive.vb</DependentUpon>
     </Compile>
-    <Compile Include="AnimeSomeoneWantToKnowWhereYouLive.vb">
+    <Compile Include="AnimeSomeoneWantsToKnowWhereYouLive.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ItsASimpleQuestion.Designer.vb">
@@ -114,11 +114,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AnimeGirlWantsCreditCarInfo.resx">
-      <DependentUpon>AnimeGirlWantsCreditCarInfo.vb</DependentUpon>
+    <EmbeddedResource Include="AnimeGirlWantsCreditCardInfo.resx">
+      <DependentUpon>AnimeGirlWantsCreditCardInfo.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AnimeSomeoneWantToKnowWhereYouLive.resx">
-      <DependentUpon>AnimeSomeoneWantToKnowWhereYouLive.vb</DependentUpon>
+    <EmbeddedResource Include="AnimeSomeoneWantsToKnowWhereYouLive.resx">
+      <DependentUpon>AnimeSomeoneWantsToKnowWhereYouLive.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ItsASimpleQuestion.resx">
       <DependentUpon>ItsASimpleQuestion.vb</DependentUpon>

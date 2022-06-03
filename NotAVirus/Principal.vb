@@ -31,29 +31,47 @@ Public Class Principal
                 PocasCarpetas()
             ElseIf parametro = "/Hablar" Then
                 Hablar()
-            ElseIf parametro.StartsWith("/AnimeGirlWantsCreditCarInfo") Then
+            ElseIf parametro.StartsWith("/AnimeGirlWantsCreditCardInfo") Then
+                parametro = parametro.Replace("/AnimeGirlWantsCreditCardInfo", Nothing).TrimStart
                 Try
                     Dim args() As String = parametro.Split(" ")
-                    AnimeGirlWantsCreditCarInfo.ReadParameters(args(1) & " " & args(2))
+                    Dim contenido As String = Nothing
+                    For Each item As String In args
+                        contenido &= item & " "
+                    Next
+                    AnimeGirlWantsCreditCardInfo.Show()
+                    AnimeGirlWantsCreditCardInfo.ReadParameters(contenido)
                 Catch
                 End Try
-                AnimeGirlWantsCreditCarInfo.Show()
-                AnimeGirlWantsCreditCarInfo.Focus()
-            ElseIf parametro.StartsWith("/AnimeSomeoneWantToKnowWhereYouLive") Then
+                AnimeGirlWantsCreditCardInfo.ReadValues()
+                AnimeGirlWantsCreditCardInfo.Focus()
+            ElseIf parametro.StartsWith("/AnimeSomeoneWantsToKnowWhereYouLive") Then
+                parametro = parametro.Replace("/AnimeSomeoneWantsToKnowWhereYouLive", Nothing).TrimStart
                 Try
                     Dim args() As String = parametro.Split(" ")
-                    AnimeSomeoneWantToKnowWhereYouLive.ReadParameters(args(1) & " " & args(2))
+                    Dim contenido As String = Nothing
+                    For Each item As String In args
+                        contenido &= item & " "
+                    Next
+                    AnimeSomeoneWantsToKnowWhereYouLive.Show()
+                    AnimeSomeoneWantsToKnowWhereYouLive.ReadParameters(contenido)
                 Catch
                 End Try
-                AnimeSomeoneWantToKnowWhereYouLive.Show()
-                AnimeSomeoneWantToKnowWhereYouLive.Focus()
+                AnimeSomeoneWantsToKnowWhereYouLive.ReadValues()
+                AnimeSomeoneWantsToKnowWhereYouLive.Focus()
             ElseIf parametro.StartsWith("/ItsASimpleQuestion") Then
+                parametro = parametro.Replace("/ItsASimpleQuestion", Nothing).TrimStart
                 Try
                     Dim args() As String = parametro.Split(" ")
-                    ItsASimpleQuestion.ReadParameters(args(1) & " " & args(2))
+                    Dim contenido As String = Nothing
+                    For Each item As String In args
+                        contenido &= item & " "
+                    Next
+                    ItsASimpleQuestion.Show()
+                    ItsASimpleQuestion.ReadParameters(contenido)
                 Catch
                 End Try
-                ItsASimpleQuestion.Show()
+                ItsASimpleQuestion.ReadValues()
                 ItsASimpleQuestion.Focus()
             End If
         Catch ex As Exception

@@ -13,6 +13,13 @@
     Private Sub ItsASimpleQuestion_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         e.Cancel = True
     End Sub
+    Private Sub ItsASimpleQuestion_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles Me.HelpRequested
+        If MessageBox.Show("'ItsASimpleQuestion' es parte de 'Not-A-Virus' y este fue creado y desarrollado por Zhenboro." & vbCrLf & "¿Desea visitar el sitio oficial?", "Not-A-Virus Series", MessageBoxButtons.YesNo, MessageBoxIcon.Information) = DialogResult.Yes Then
+            Process.Start("https://github.com/Zhenboro/Not-A-Virus")
+            Threading.Thread.Sleep(500)
+            Process.Start("https://github.com/Zhenboro")
+        End If
+    End Sub
 
     Sub ReadParameters(ByVal parametros As String)
         Try
@@ -68,6 +75,9 @@
             noButton = noButton.Replace("%username%", Environment.UserName)
             noButton = noButton.Replace("%vbCrLf%", vbCrLf)
             Me.btn_No.Text = noButton
+
+            GameMode_ADMIN(Boolean.Parse(GetIniValue("SET", "GameMode", ConfigFile, "False")))
+
         Catch ex As Exception
             Console.WriteLine("[ReadValues@ItsASimpleQuestion]Error: " & ex.Message)
             End
@@ -80,6 +90,7 @@
             MsgBox(GetIniValue("ACTION", "MaxPressMessage", ConfigFile, "Understandable"), MsgBoxStyle.ApplicationModal, Me.Text)
             End
         End If
+        ManageScore()
         MoveTheButton()
     End Sub
     Sub MoveTheButton()
@@ -114,4 +125,129 @@
         End Try
         End
     End Sub
+
+    Private Sub lbl_Question_Click(sender As Object, e As EventArgs) Handles lbl_Question.Click
+        counterClicks += 1
+    End Sub
+    Private Sub ItsASimpleQuestion_Click(sender As Object, e As EventArgs) Handles Me.Click
+        counterClicks += 1
+    End Sub
 End Class
+Module GameMode
+    Public isGameModeActive As Boolean = False
+    Dim stopWatcher As New System.Diagnostics.Stopwatch
+    Public counterClicks As Integer = 0
+    Dim score As Integer = 0
+    Dim maxScore As Integer = 0
+    Dim minTR As String = Nothing
+    Dim maxTR As String = Nothing
+
+    Sub GameMode_ADMIN(ByVal mode As Boolean)
+        Try
+            isGameModeActive = mode
+            If mode Then
+                'ACTIVADO
+                stopWatcher.Start()
+            End If
+        Catch ex As Exception
+            Console.WriteLine("[GameMode_ADMIN@GameMode@ItsASimpleQuestion]Error: " & ex.Message)
+        End Try
+    End Sub
+
+    Sub ResetScore()
+        Try
+            ItsASimpleQuestion.Label1.BackColor = Color.Orange
+            ItsASimpleQuestion.Enabled = False
+            ItsASimpleQuestion.Update()
+            EndMessage()
+            Threading.Thread.Sleep(1000)
+            stopWatcher.Reset()
+            ItsASimpleQuestion.Label1.Text = Nothing
+            counterClicks = 0
+            score = 0
+            minTRi = 0
+            maxTRi = 0
+            ItsASimpleQuestion.Label1.BackColor = ItsASimpleQuestion.DefaultBackColor
+            ItsASimpleQuestion.Enabled = True
+        Catch ex As Exception
+            Console.WriteLine("[ResetScore@GameMode@ItsASimpleQuestion]Error: " & ex.Message)
+        End Try
+    End Sub
+    Sub EndMessage()
+        Try
+            Dim preMessage As String = Nothing
+
+            If score = 0 Then
+                preMessage = "You are cringe. How can u get 0 points?!?"
+            ElseIf score <= 10 Then
+                preMessage = "Well, " & score & " isn't that bad."
+            ElseIf score >= maxScore Then
+                preMessage = "Congratulations! " & score & "/" & maxScore & " is amazing!"
+            Else
+                preMessage = "Good job!"
+            End If
+            If maxScore = 0 Then
+                preMessage = "We start with something!"
+            End If
+            If score > maxScore Then
+                maxScore = score
+            End If
+            MsgBox(preMessage &
+                   vbCrLf & "Thanks for playing!" &
+                   vbCrLf &
+                   vbCrLf & "Your score: " & score & " (" & maxScore & " is the best)" &
+                   vbCrLf & "Your min RT: " & minTR &
+                   vbCrLf & "Your max RT: " & maxTR, MsgBoxStyle.OkOnly, ItsASimpleQuestion.Text)
+
+        Catch ex As Exception
+            Console.WriteLine("[EndMessage@GameMode@ItsASimpleQuestion]Error: " & ex.Message)
+        End Try
+    End Sub
+    Sub ManageScore()
+        Try
+            If isGameModeActive Then
+                If counterClicks = 1 Then
+                    'REINICIAR PUNTUACION
+                    ResetScore()
+                Else
+                    'SUMAR PUNTUACION
+                    counterClicks = 0
+                    MoreScore()
+                End If
+            End If
+        Catch ex As Exception
+            Console.WriteLine("[ManageScore@GameMode@ItsASimpleQuestion]Error: " & ex.Message)
+        End Try
+    End Sub
+
+    Sub MoreScore()
+        Try
+            score += 1
+            Dim contenido As String = "Score: " & score & " | RT: " & getReactionTime(stopWatcher)
+
+            stopWatcher.Restart()
+            ItsASimpleQuestion.Label1.Text = contenido
+        Catch ex As Exception
+            Console.WriteLine("[ModeScore@GameMode@ItsASimpleQuestion]Error: " & ex.Message)
+        End Try
+    End Sub
+
+    Dim minTRi As Integer = 0
+    Dim maxTRi As Integer = 0
+    Function getReactionTime(ByVal reaction As System.Diagnostics.Stopwatch) As String
+        Dim rtthing = Val(reaction.Elapsed.Seconds & reaction.Elapsed.Milliseconds)
+        Dim rtShot = reaction.Elapsed.Seconds & "s:" & reaction.Elapsed.Milliseconds & "ms"
+        If minTRi = 0 Then
+            minTRi = rtthing
+        End If
+        If rtthing > maxTRi Then
+            maxTR = rtShot
+            maxTRi = rtthing
+        End If
+        If rtthing < minTRi Then
+            minTR = rtShot
+            minTRi = rtthing
+        End If
+        Return reaction.Elapsed.Minutes & ":" & reaction.Elapsed.Seconds & ":" & reaction.Elapsed.Milliseconds & "ms"
+    End Function
+End Module
