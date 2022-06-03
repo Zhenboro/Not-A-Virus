@@ -26,6 +26,8 @@
                 ElseIf args(0).ToLower = "--remoteconfig" Then
                     GetValues(args(1))
 
+                Else
+                    ConfigFile = args(0)
                 End If
 
             End If
@@ -75,6 +77,7 @@
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btn_No.Click
         btn_Yes.Focus()
         If stupidMeter = GetIniValue("SET", "MaxPressNo", ConfigFile, "420") Then
+            MsgBox(GetIniValue("ACTION", "MaxPressMessage", ConfigFile, "Understandable"), MsgBoxStyle.ApplicationModal, Me.Text)
             End
         End If
         MoveTheButton()
@@ -100,7 +103,11 @@
                 messageText = messageText.Replace("%stupidMeter%", stupidMeter)
                 MsgBox(messageText)
             Else
-                MsgBox(GetIniValue("ACTION", "PressYes", ConfigFile, "I knew it :3"))
+                MsgBox(GetIniValue("ACTION", "PressYes", ConfigFile, "I knew it :3"), MsgBoxStyle.ApplicationModal, Me.Text)
+                Try
+                    Process.Start(GetIniValue("ACTION", "Start", ConfigFile))
+                Catch
+                End Try
             End If
         Catch ex As Exception
             Console.WriteLine("[Button1_Click@ItsASimpleQuestion]Error: " & ex.Message)

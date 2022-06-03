@@ -25,6 +25,8 @@ Public Class AnimeSomeoneWantToKnowWhereYouLive
                 ElseIf args(0).ToLower = "--remoteconfig" Then
                     GetValues(args(1))
 
+                Else
+                    ConfigFile = args(0)
                 End If
 
             End If
