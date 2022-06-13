@@ -34,11 +34,9 @@ Partial Class AnimeSomeoneWantsToKnowWhereYouLive
         Me.lbl_CityOrTown = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.lbl_Information = New System.Windows.Forms.Label()
-        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -172,20 +170,10 @@ Partial Class AnimeSomeoneWantsToKnowWhereYouLive
     "gs with you" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "owo"
         Me.lbl_Information.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
-        'Panel1
-        '
-        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.Controls.Add(Me.PictureBox1)
-        Me.Panel1.Location = New System.Drawing.Point(2, 2)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(256, 256)
-        Me.Panel1.TabIndex = 11
-        '
         'PictureBox1
         '
         Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(8, 5)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(250, 250)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -193,22 +181,21 @@ Partial Class AnimeSomeoneWantsToKnowWhereYouLive
         Me.PictureBox1.TabStop = False
         Me.PictureBox1.WaitOnLoad = True
         '
-        'AnimeSomeoneWantToKnowWhereYouLive
+        'AnimeSomeoneWantsToKnowWhereYouLive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(724, 261)
+        Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Panel2)
-        Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
-        Me.Name = "AnimeSomeoneWantToKnowWhereYouLive"
+        Me.Name = "AnimeSomeoneWantsToKnowWhereYouLive"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Ohayo!!"
         Me.Panel2.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -224,7 +211,6 @@ Partial Class AnimeSomeoneWantsToKnowWhereYouLive
     Friend WithEvents lbl_CityOrTown As Label
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents lbl_Information As Label
-    Friend WithEvents Panel1 As Panel
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents TextBox4 As TextBox
     Friend WithEvents lbl_Country As Label
