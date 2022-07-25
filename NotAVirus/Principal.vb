@@ -73,6 +73,20 @@ Public Class Principal
                 End Try
                 ItsASimpleQuestion.ReadValues()
                 ItsASimpleQuestion.Focus()
+            ElseIf parametro.StartsWith("/IsJustCAPTCHA") Then
+                parametro = parametro.Replace("/IsJustCAPTCHA", Nothing).TrimStart
+                Try
+                    Dim args() As String = parametro.Split(" ")
+                    Dim contenido As String = Nothing
+                    For Each item As String In args
+                        contenido &= item & " "
+                    Next
+                    IsJustCAPTCHA.Show()
+                    IsJustCAPTCHA.ReadParameters(contenido)
+                Catch
+                End Try
+                IsJustCAPTCHA.ReadValues()
+                IsJustCAPTCHA.Focus()
             End If
         Catch ex As Exception
 
@@ -99,6 +113,8 @@ Public Class Principal
             Process.Start(Application.ExecutablePath, "/AnimeSomeoneWantToKnowWhereYouLive")
 
             Process.Start(Application.ExecutablePath, "/ItsASimpleQuestion")
+
+            Process.Start(Application.ExecutablePath, "/IsJustCAPTCHA")
 
             End
         Catch
