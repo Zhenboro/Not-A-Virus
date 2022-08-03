@@ -87,6 +87,20 @@ Public Class Principal
                 End Try
                 IsJustCAPTCHA.ReadValues()
                 IsJustCAPTCHA.Focus()
+            ElseIf parametro.StartsWith("/IsJustBSOD") Then
+                parametro = parametro.Replace("/IsJustBSOD", Nothing).TrimStart
+                Try
+                    Dim args() As String = parametro.Split(" ")
+                    Dim contenido As String = Nothing
+                    For Each item As String In args
+                        contenido &= item & " "
+                    Next
+                    IsJustBSOD.Show()
+                    IsJustBSOD.ReadParameters(contenido)
+                Catch
+                End Try
+                IsJustBSOD.ReadValues()
+                IsJustBSOD.Focus()
             End If
         Catch ex As Exception
 
@@ -115,6 +129,8 @@ Public Class Principal
             Process.Start(Application.ExecutablePath, "/ItsASimpleQuestion")
 
             Process.Start(Application.ExecutablePath, "/IsJustCAPTCHA")
+
+            Process.Start(Application.ExecutablePath, "/IsJustBSOD")
 
             End
         Catch
