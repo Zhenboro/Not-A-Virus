@@ -1,3 +1,4 @@
+
 # Not-A-Virus
 Is not a virus.  
 
@@ -21,6 +22,8 @@ Will start:
 - /ItsASimpleQuestion
 - /AnimeGirlWantsCreditCarInfo
 - /AnimeSomeoneWantsToKnowWhereYouLive
+- /IsJustCAPTCHA
+- /IsJustBSOD
 
 ```/PlaySongs```: It will start playing all with ```Console.Beep()```. The first song is from Mario Bros, then Mission Impossible and ends with the theme of Tetris.  
 
@@ -51,6 +54,22 @@ Will start:
 - If you do not put arguments, a preconfigured instance will begin.  
 
 ```/ItsASimpleQuestion <type> <filePathOrUrl>```
+- type: If you must read from a local file `--localConfig` or download and then read `--remoteConfig`.  
+- filePathOrUrl:  
+	- in the `--localConfig` Case. Put the file path of the config file.  
+	- in the `--remoteConfig` Case. Put the file download link. (Download then Read)  
+- If you do not put arguments, a preconfigured instance will begin.  
+**_NOTE:_**  Not necesary to put "--localConfig" when is local file. Just send the file path only.
+
+```/IsJustCAPTCHA <type> <filePathOrUrl>```
+- type: If you must read from a local file `--localConfig` or download and then read `--remoteConfig`.  
+- filePathOrUrl:  
+	- in the `--localConfig` Case. Put the file path of the config file.  
+	- in the `--remoteConfig` Case. Put the file download link. (Download then Read)  
+- If you do not put arguments, a preconfigured instance will begin.  
+**_NOTE:_**  Not necesary to put "--localConfig" when is local file. Just send the file path only.
+
+```/IsJustBSOD <type> <filePathOrUrl>```
 - type: If you must read from a local file `--localConfig` or download and then read `--remoteConfig`.  
 - filePathOrUrl:  
 	- in the `--localConfig` Case. Put the file path of the config file.  
