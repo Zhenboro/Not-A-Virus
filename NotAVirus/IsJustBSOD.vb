@@ -3,9 +3,9 @@
     Dim ConfigFile As String = DIRCommons & "\IsJustBSOD.ini"
     Dim userCanExit As Boolean = False
 
-    Dim MustIncrement As Boolean = True
-    Dim MaxPercent As Integer = 100
-    Dim completed As String = "completado"
+    Dim MustIncrement As Boolean
+    Dim MaxPercent As Integer
+    Dim completed As String
 
     Private Sub IsJustBSOD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
@@ -88,6 +88,10 @@
             meErrorInfo = meErrorInfo.Replace("%vbCrLf%", vbCrLf)
             Me.lbl_ErrorInfo.Text = meErrorInfo
 
+            MustIncrement = Boolean.Parse(GetIniValue("SET", "MustIncrement", ConfigFile, True))
+            MaxPercent = Integer.Parse(GetIniValue("SET", "MaxPercent", ConfigFile, 100))
+            completed = GetIniValue("SET", "completed", ConfigFile, "completed")
+
             Me.PictureBox1.ImageLocation = GetIniValue("IMAGE", "QR", ConfigFile, "https://i.pinimg.com/originals/60/c1/4a/60c14a43fb4745795b3b358868517e79.png")
 
             'Dim backgroundImageURL As String = GetIniValue("SET", "completed", ConfigFile, "completado")
@@ -101,10 +105,6 @@
             '    Me.BackgroundImage = img
             'End If
             'End If
-
-            MustIncrement = Boolean.Parse(GetIniValue("SET", "MustIncrement", ConfigFile, True))
-            MaxPercent = Integer.Parse(GetIniValue("SET", "MaxPercent", ConfigFile, 100))
-            completed = GetIniValue("SET", "completed", ConfigFile, "completado")
         Catch ex As Exception
             Console.WriteLine("[ReadValues@IsJustBSOD]Error: " & ex.Message)
             End
@@ -135,7 +135,7 @@
         Else
             'decrementar de MaxPercent (=100) a 0
             porcentaje = MaxPercent
-            While porcentaje > MaxPercent + 1
+            While porcentaje > 0
 
                 lbl_Status.Text = porcentaje & "% " & completed
 
@@ -148,5 +148,4 @@
         End
 
     End Sub
-
 End Class
