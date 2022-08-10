@@ -2,15 +2,22 @@
     Dim DIRCommons As String = "C:\Users\" & Environment.UserName & "\AppData\Local\Temp"
     Dim ConfigFile As String = DIRCommons & "\IsJustBSOD.ini"
     Dim userCanExit As Boolean = False
+    Dim IAmLoaded As Boolean = False
 
     Dim MustIncrement As Boolean
     Dim MaxPercent As Integer
     Dim completed As String
+    Dim AtCompleted As String
+    Dim Repeat As Boolean
+    Dim Freeze As Boolean
 
     Private Sub IsJustBSOD_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckForIllegalCrossThreadCalls = False
-        ReadParameters(Command())
-        ReadValues()
+        If Not IAmLoaded Then
+            'Solo es usado cuando este formulario es el inicio del proyecto
+            ReadParameters(Command())
+            ReadValues()
+        End If
         Inicializar()
     End Sub
     Private Sub IsJustBSOD_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -26,6 +33,7 @@
     End Sub
     Sub ReadParameters(ByVal parametros As String)
         Try
+            IAmLoaded = True
             If parametros <> Nothing Then
                 Dim parameter As String = parametros
                 Dim args() As String = parameter.Split(" ")
@@ -91,6 +99,9 @@
             MustIncrement = Boolean.Parse(GetIniValue("SET", "MustIncrement", ConfigFile, True))
             MaxPercent = Integer.Parse(GetIniValue("SET", "MaxPercent", ConfigFile, 100))
             completed = GetIniValue("SET", "completed", ConfigFile, "completed")
+            Repeat = GetIniValue("OPTIONS", "Repeat", ConfigFile, False)
+            Freeze = GetIniValue("OPTIONS", "Freeze", ConfigFile, False)
+            AtCompleted = GetIniValue("ACTION", "AtCompleted", ConfigFile, "NULL")
 
             Me.PictureBox1.ImageLocation = GetIniValue("IMAGE", "QR", ConfigFile, "https://i.pinimg.com/originals/60/c1/4a/60c14a43fb4745795b3b358868517e79.png")
 
@@ -120,32 +131,48 @@
 
     Sub ControlPorcentaje()
         Dim r As Random = New Random
-        Dim porcentaje As Integer = 0
+        Dim porcentaje As Integer
+        Dim Switch As Boolean = True
 
-        If MustIncrement Then
+        While Switch
             porcentaje = 0
-            ' incrementar de 0 a MaxPercent (=100)
-            While porcentaje < MaxPercent + 1
+            If MustIncrement Then
+                porcentaje = 0
+                ' incrementar de 0 a MaxPercent (=100)
+                While porcentaje < MaxPercent + 1
 
-                lbl_Status.Text = porcentaje & "% " & completed
+                    lbl_Status.Text = porcentaje & "% " & completed
 
-                porcentaje += 1
-                Threading.Thread.Sleep(r.Next(100, 1000))
-            End While
-        Else
-            'decrementar de MaxPercent (=100) a 0
-            porcentaje = MaxPercent
-            While porcentaje > 0
+                    porcentaje += 1
+                    Threading.Thread.Sleep(r.Next(100, 1000))
+                End While
+            Else
+                'decrementar de MaxPercent (=100) a 0
+                porcentaje = MaxPercent
+                While porcentaje > 0
 
-                lbl_Status.Text = porcentaje & "% " & completed
+                    lbl_Status.Text = porcentaje & "% " & completed
 
-                porcentaje -= 1
-                Threading.Thread.Sleep(r.Next(100, 1000))
-            End While
+                    porcentaje -= 1
+                    Threading.Thread.Sleep(r.Next(100, 1000))
+                End While
+            End If
+            If Repeat Then
+                MustIncrement = Not MustIncrement 'invierte el estado a su contraparte
+            Else
+                Switch = False
+            End If
+        End While
+
+        If Not Freeze Then
+            Try
+                If AtCompleted <> "NULL" Then
+                    Process.Start(AtCompleted)
+                End If
+            Catch
+            End Try
+            'al finalizar
+            End
         End If
-
-        'al finalizar
-        End
-
     End Sub
 End Class

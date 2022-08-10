@@ -5,10 +5,14 @@ Public Class AnimeSomeoneWantsToKnowWhereYouLive
     Dim DIRCommons As String = "C:\Users\" & Environment.UserName & "\AppData\Local\Temp"
     Dim ConfigFile As String = DIRCommons & "\AnimeSomeoneWantToKnowWhereYouLive.ini"
     Dim userCanExit As Boolean = False
+    Dim IAmLoaded As Boolean = False
 
     Private Sub AnimeSomeoneWantsToKnowWhereYouLive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ReadParameters(Command())
-        ReadValues()
+        If Not IAmLoaded Then
+            'Solo es usado cuando este formulario es el inicio del proyecto
+            ReadParameters(Command())
+            ReadValues()
+        End If
     End Sub
     Private Sub AnimeSomeoneWantsToKnowWhereYouLive_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         End
@@ -22,6 +26,7 @@ Public Class AnimeSomeoneWantsToKnowWhereYouLive
     End Sub
     Sub ReadParameters(ByVal parametros As String)
         Try
+            IAmLoaded = True
             If parametros <> Nothing Then
                 Dim parameter As String = parametros
                 Dim args() As String = parameter.Split(" ")
